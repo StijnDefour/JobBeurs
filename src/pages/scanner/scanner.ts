@@ -13,13 +13,7 @@ export class ScanPage {
   items: Array<{naam: string, studnr: string}>;
 
   constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner) {
-    /*this.items = [
-      { "naam": "Stijn", "studnr": "S6969"},
-      { "naam": "Mahyar", "studnr": "S666" },
-      { "naam": "Cedric", "studnr": "S420blazeit" }
-    ];
-
-    localStorage.setItem('aanwezigen', JSON.stringify(this.items));*/
+    this.items = JSON.parse(localStorage.getItem('aanwezigen'));
   }
 
   async scanBarcode() {
