@@ -27,7 +27,7 @@ export class ScanPage {
 
     this.items.push({
         naam: 'Nieuwe',
-        studnr: 'this.results.text'
+        studnr: this.results.text
       });
 
     localStorage.setItem('aanwezigen', JSON.stringify(this.items));
