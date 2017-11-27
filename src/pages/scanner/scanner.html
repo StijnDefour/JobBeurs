@@ -9,7 +9,7 @@
 
 
 <ion-content padding>
-  <h3>Scanner</h3>
+  <button ion-button full (click)="scanBarcode()">Scan Barcode</button>
 
   <div *ngIf="results">
     <p>{{ results.text }}</p>
@@ -17,5 +17,11 @@
     <p>{{ results.cancelled }}</p>
   </div>
 
-  <button ion-button (click)="scanBarcode()">Scan Barcode</button>
 </ion-content>
+
+<ion-tabs>
+  <ion-tab tabIcon="water" tabTitle="Water" [root]="tab1"></ion-tab>
+  <ion-tab tabIcon="leaf" tabTitle="Life" [root]="tab2"></ion-tab>
+  <ion-tab tabIcon="flame" tabTitle="Fire" [root]="tab3"></ion-tab>
+  <ion-tab tabIcon="magnet" tabTitle="Force" [root]="tab4"></ion-tab>
+</ion-tabs>

@@ -7,12 +7,19 @@ import { ScanPage } from '../pages/scanner/scanner';
 import { ListPage } from '../pages/list/list';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  template: `
+    <ion-tabs>
+      <ion-tab tabIcon="barcode" tabTitle="Scanner" [root]="tab1"></ion-tab>
+      <ion-tab tabIcon="people" tabTitle="Aanwezigen" [root]="tab2"></ion-tab>
+    </ion-tabs>`
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = ScanPage;
+  tab1: any;
+  tab2: any;
 
   pages: Array<{title: string, component: any}>;
 
@@ -25,6 +32,9 @@ export class MyApp {
       { title: 'List', component: ListPage }
     ];
 
+    //Tabs
+    this.tab1 = ScanPage;
+    this.tab2 = ListPage;
   }
 
   initializeApp() {

@@ -16,7 +16,6 @@ export class ScanPage {
 
   async scanBarcode() {
     this.results = await this.barcodeScanner.scan();
-    console.log(this.results);
   }
 
 }
