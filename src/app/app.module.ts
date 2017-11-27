@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { ScanPage } from '../pages/scanner/scanner';
 import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -11,11 +11,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    ScanPage,
     ListPage
   ],
   imports: [
@@ -26,14 +27,15 @@ import { IonicStorageModule } from '@ionic/storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    ScanPage,
     ListPage
   ],
   providers: [
-    Camera,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Camera,
+    BarcodeScanner
   ]
 })
 export class AppModule {}
