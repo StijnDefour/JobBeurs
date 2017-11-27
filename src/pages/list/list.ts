@@ -11,11 +11,5 @@ export class ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.items = JSON.parse(localStorage.getItem('aanwezigen'));
-
-    /*this.items = [
-      { "naam": "Stijn", "studnr": "S6969"},
-      { "naam": "Mahyar", "studnr": "S666" },
-      { "naam": "Cedric", "studnr": "S420blazeit" }
-    ];*/
   }
 }

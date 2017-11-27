@@ -18,12 +18,13 @@ export class ScanPage {
 
   async scanBarcode() {
     this.results = await this.barcodeScanner.scan();
+    if (!this.results.cancelled) {
+      this.items.push({
+          naam: 'Nieuwe',
+          studnr: this.results.text
+        });
 
-    this.items.push({
-        naam: 'Nieuwe',
-        studnr: this.results.text
-      });
-
-    localStorage.setItem('aanwezigen', JSON.stringify(this.items));
+      localStorage.setItem('aanwezigen', JSON.stringify(this.items));
+    }
   }
 }
