@@ -10,5 +10,12 @@
 
 <ion-content padding>
   <h3>Scanner</h3>
+
+  <div *ngIf="results">
+    <p>{{ results.text }}</p>
+    <p>{{ results.format }}</p>
+    <p>{{ results.cancelled }}</p>
+  </div>
+
   <button ion-button (click)="scanBarcode()">Scan Barcode</button>
 </ion-content>
