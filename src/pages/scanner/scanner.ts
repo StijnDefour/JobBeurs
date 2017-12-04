@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, List } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import * as $ from 'jquery';
 
@@ -13,20 +13,19 @@ export class ScanPage {
   results: {};
   items: Array<{naam: string, studnr: string}>;
 
-  constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner) {
+  constructor(public navCtrl: NavController/*, private barcodeScanner: BarcodeScanner*/) {
 
   }
 
   async scanBarcode() {
-    this.results = await this.barcodeScanner.scan();
-    if (!this.results.cancelled) {
-      this.getStudenten(this.results.text);
-    }
+    //this.results = await this.barcodeScanner.scan();
+    //if (!this.results.cancelled) {
+      this.getStudenten("s000009567129");
+    //}
   }
 
   async getStudenten(input: string) {
     var url_s = 'https://defourstijn.cloudant.com/studenten/19cbb0e3b2065adcadd507f609df43d5';
-    var output = '';
 		$.get(
 				url_s,
 				function(data_o) {
