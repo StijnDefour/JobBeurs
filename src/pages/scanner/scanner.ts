@@ -25,7 +25,7 @@ export class ScanPage {
           naam: this.getStudenten(this.results.text),
           studnr: this.results.text
         });*/
-        console.log(this.getStudenten(this.results.text));
+        alert(this.getStudenten(this.results.text));
       localStorage.setItem('aanwezigen', JSON.stringify(this.items));
     }
   }
