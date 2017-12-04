@@ -12,4 +12,8 @@ export class ListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.items = JSON.parse(localStorage.getItem('aanwezigen'));
   }
+
+  refreshPagina() {
+    this.items = JSON.parse(localStorage.getItem('aanwezigen'));
+  }
 }

@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+  <button ion-button full (click)="refreshPagina()">Refresh</button>
   <ion-list>
     <div ion-item *ngFor="let item of items">
       {{item.naam}}
