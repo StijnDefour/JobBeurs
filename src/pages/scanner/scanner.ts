@@ -13,15 +13,15 @@ export class ScanPage {
   results: {};
   items: Array<{naam: string, studnr: string}>;
 
-  constructor(public navCtrl: NavController/*, private barcodeScanner: BarcodeScanner*/) {
+  constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner) {
 
   }
 
   async scanBarcode() {
-    //this.results = await this.barcodeScanner.scan();
-    //if (!this.results.cancelled) {
-      this.getStudenten("s000009567129");
-    //}
+    this.results = await this.barcodeScanner.scan();
+    if (!this.results.cancelled) {
+      this.getStudenten(this.results.text);
+    }
   }
 
   async getStudenten(input: string) {
