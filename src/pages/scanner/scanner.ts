@@ -37,11 +37,12 @@ export class ScanPage {
 						for(var i = 0; i < data_o.studenten.length; i++)
 						{
               if (data_o.studenten[i].registratienummer == input) {
-                var naam = data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam;
-                this.items.push({
+                var output = data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam;
+                /*this.items.push({
                   naam: naam,
                   studnr: input
-                });
+                });*/
+                alert(output);
                 break;
               }
 						}
