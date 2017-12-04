@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, List } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import * as $ from 'jquery';
 
@@ -14,17 +14,21 @@ export class ScanPage {
   items: Array<{naam: string, studnr: string}>;
 
   constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner) {
-
+    this.items = JSON.parse(localStorage.getItem('aanwezigen'));
   }
 
   async scanBarcode() {
     this.results = await this.barcodeScanner.scan();
     if (!this.results.cancelled) {
-      this.getStudenten(this.results.text);
+      this.items.push({
+        naam: this.getStudenten(this.results.text),
+        studnr: this.results.text
+      });
+       localStorage.setItem('aanwezigen', JSON.stringify(this.items));
     }
   }
 
-  async getStudenten(input: string) {
+  async getStudenten(input: string) : string {
     var url_s = 'https://defourstijn.cloudant.com/studenten/19cbb0e3b2065adcadd507f609df43d5';
     var output = '';
 		$.get(
@@ -33,19 +37,12 @@ export class ScanPage {
             input = input.substring(4, 11) + "-" + input.substring(input.length-2);
 						for(var i = 0; i < data_o.studenten.length; i++)
 						{
-              if (data_o.studenten[i].registratienummer == input) {
-                var output = data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam;
-
-                this.items = (JSON.parse(localStorage.getItem('aanwezigen'))==null?[]:JSON.parse(localStorage.getItem('aanwezigen')));
-                this.items.push({
-                  naam: output,
-                  studnr: input
-                });
-                localStorage.setItem('aanwezigen', JSON.stringify(this.items));
-                break;
-              }
+			              if (data_o.studenten[i].registratienummer == input) { 
+			                  output = data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam;
+			              }
 						}
 				}
 			);
+	return output;
   }
 }
