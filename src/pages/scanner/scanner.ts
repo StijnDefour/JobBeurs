@@ -39,7 +39,7 @@ export class ScanPage {
               if (data_o.studenten[i].registratienummer == input) {
                     this.items.push({
                       naam: data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam,
-                      studnr: this.results.text
+                      studnr: input
                     });
                 break;
               }
