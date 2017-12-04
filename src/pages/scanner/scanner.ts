@@ -31,10 +31,10 @@ export class ScanPage {
 		$.get(
 				url_s,
 				function(data_o) {
-            input_ = input.substring(4, 11) + "-" + input.substring(input.length-2);
+            input = input.substring(4, 11) + "-" + input.substring(input.length-2);
 						for(var i = 0; i < data_o.studenten.length; i++)
 						{
-              if (data_o.studenten[i].registratienummer == input_) {
+              if (data_o.studenten[i].registratienummer == input) {
                 this.items.push({
                     naam: data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam,
                     studnr: input
