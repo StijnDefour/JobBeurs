@@ -1,14 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Aanwezigen</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="refreshPagina()">
+        <ion-icon name="refresh-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <button ion-button full (click)="refreshPagina()">Refresh</button>
   <ion-list>
     <div ion-item *ngFor="let item of items">
       {{item.naam}}
