@@ -21,11 +21,8 @@ export class ScanPage {
     this.results = await this.barcodeScanner.scan();
     if (!this.results.cancelled) {
 
-      /*this.items.push({
-          naam: this.getStudenten(this.results.text),
-          studnr: this.results.text
-        });*/
-        alert(this.getStudenten(this.results.text));
+        this.getStudenten(this.results.text);
+
       localStorage.setItem('aanwezigen', JSON.stringify(this.items));
     }
   }
@@ -40,7 +37,10 @@ export class ScanPage {
 						for(var i = 0; i < data_o.studenten.length; i++)
 						{
               if (data_o.studenten[i].registratienummer == input) {
-                  return data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam;
+                    this.items.push({
+                      naam: data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam,
+                      studnr: this.results.text
+                    });
                 break;
               }
 						}
