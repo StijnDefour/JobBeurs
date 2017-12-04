@@ -21,11 +21,11 @@ export class ScanPage {
     this.results = await this.barcodeScanner.scan();
     if (!this.results.cancelled) {
 
-      this.items.push({
+      /*this.items.push({
           naam: this.getStudenten(this.results.text),
           studnr: this.results.text
-        });
-        
+        });*/
+        console.log(this.getStudenten(this.results.text));
       localStorage.setItem('aanwezigen', JSON.stringify(this.items));
     }
   }
