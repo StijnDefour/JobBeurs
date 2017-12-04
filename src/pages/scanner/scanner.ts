@@ -25,7 +25,7 @@ export class ScanPage {
     }
   }
 
-  getStudenten(input: String) {
+  async getStudenten(input: String) {
     var url_s = 'https://defourstijn.cloudant.com/studenten/19cbb0e3b2065adcadd507f609df43d5';
 
 		$.get(
@@ -39,6 +39,7 @@ export class ScanPage {
                     naam: data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam,
                     studnr: input
                   });
+                break;
               }
 						}
 				}
