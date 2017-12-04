@@ -30,7 +30,7 @@ export class ScanPage {
     }
   }
 
-  async getStudenten(input: String) {
+  getStudenten(input: String) {
     var url_s = 'https://defourstijn.cloudant.com/studenten/19cbb0e3b2065adcadd507f609df43d5';
 
 		$.get(
