@@ -11,7 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 //import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner'; 
 
 @NgModule({
   declarations: [

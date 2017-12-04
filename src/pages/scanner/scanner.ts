@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'page-scanner',
@@ -19,12 +20,28 @@ export class ScanPage {
   async scanBarcode() {
     this.results = await this.barcodeScanner.scan();
     if (!this.results.cancelled) {
-      this.items.push({
-          naam: 'Nieuwe',
-          studnr: this.results.text
-        });
-
+      this.getStudenten(this.results.text);
       localStorage.setItem('aanwezigen', JSON.stringify(this.items));
     }
+  }
+
+  getStudenten(input: String) {
+    var url_s = 'https://defourstijn.cloudant.com/studenten/19cbb0e3b2065adcadd507f609df43d5';
+
+		$.get(
+				url_s,
+				function(data_o) {
+            input_ = input.substring(4, 11) + "-" + input.substring(input.length-2);
+						for(var i = 0; i < data_o.studenten.length; i++)
+						{
+              if (data_o.studenten[i].registratienummer == input_) {
+                this.items.push({
+                    naam: data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam,
+                    studnr: input
+                  });
+              }
+						}
+				}
+			);
   }
 }
