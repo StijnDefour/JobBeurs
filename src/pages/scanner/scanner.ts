@@ -12,7 +12,6 @@ export class ScanPage {
   options: BarcodeScannerOptions;
   results: {};
   items: Array<{naam: string, studnr: string}>;
-  naam: string;
 
   constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner) {
     this.items = JSON.parse(localStorage.getItem('aanwezigen'));
@@ -21,10 +20,8 @@ export class ScanPage {
   async scanBarcode() {
     this.results = await this.barcodeScanner.scan();
     if (!this.results.cancelled) {
-       this.naam = this.getStudenten(this.results.text);
-       alert(this.naam);
       this.items.push({
-        naam: this.naam,
+        naam: this.getStudenten(this.results.text),
         studnr: this.results.text
       });
        localStorage.setItem('aanwezigen', JSON.stringify(this.items));
@@ -42,11 +39,10 @@ export class ScanPage {
 						{
 			              if (data_o.studenten[i].registratienummer == input) { 
 			                  output = data_o.studenten[i].naam + " " + data_o.studenten[i].voornaam;
-			                  alert(output);
-			                  return output;
 			              }
 						}
 				}
 			);
+	return output;
   }
 }
