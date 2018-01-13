@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { SettingsPopover } from '../settings-popover/settings-popover';
 
 @Component({
 	selector: 'page-list',
@@ -10,7 +11,7 @@ export class ListPage {
 
 	items: Array<{naam: string, studnr: string}>;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public alertCtrl: AlertController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
 	this.items = JSON.parse(localStorage.getItem('aanwezigen'));
 	}
 
@@ -18,30 +19,10 @@ export class ListPage {
 	this.items = JSON.parse(localStorage.getItem('aanwezigen'));
 	}
 
-	weergevenPopover() {
-		let popover = this.popoverCtrl.create(MyPopOverPage);
-		popover.present();
+	weergevenPopover(event) {
+		let popover = this.popoverCtrl.create(SettingsPopover);
+		popover.present({
+			ev: event
+		});
 	}
-
-	bevestigingTonen() {
-	let confirm = this.alertCtrl.create({
-	  title: 'Lijst wissen?',
-	  message: 'Opgelet! U staat op het punt deze lijst te wissen. Bent u zeker?',
-	  buttons: [
-	    {
-	      text: 'Ja, doorgaan.',
-	      handler: () => {
-	        console.log('agreed clicked');
-	      }
-	    },
-	    {
-	      text: 'Neen, teruggaan.',
-	      handler: () => {
-	        console.log('nope clicked');
-	      }
-	    }
-	  ]
-	});
-	confirm.present();
-  	}
 }

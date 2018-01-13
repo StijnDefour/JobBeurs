@@ -5,6 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { ScanPage } from '../pages/scanner/scanner';
 import { ListPage } from '../pages/list/list';
+import { SettingsPopover } from '../pages/settings-popover/settings-popover';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,7 +18,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
   declarations: [
     MyApp,
     ScanPage,
-    ListPage
+    ListPage,
+    SettingsPopover
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
   entryComponents: [
     MyApp,
     ScanPage,
-    ListPage
+    ListPage,
+    SettingsPopover
   ],
   providers: [
     StatusBar,
