@@ -16,7 +16,7 @@ export class ListPage {
 	}
 
 	refreshPagina() {
-	this.items = JSON.parse(localStorage.getItem('aanwezigen'));
+		this.items = JSON.parse(localStorage.getItem('aanwezigen'));
 	}
 
 	weergevenPopover(event) {
