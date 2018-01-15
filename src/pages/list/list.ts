@@ -15,7 +15,7 @@ export class ListPage {
 	this.items = JSON.parse(localStorage.getItem('aanwezigen'));
 	}
 
-	refreshPagina() {
+	ionViewWillEnter() {
 		this.items = JSON.parse(localStorage.getItem('aanwezigen'));
 	}
 

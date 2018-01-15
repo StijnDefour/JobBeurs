@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ViewController, AlertController } from 'ionic-angular';
+import { NavController, ViewController, AlertController } from 'ionic-angular';
 import { Headers, Http, Request, RequestMethod } from "@angular/http";
+import { ListPage } from '../list/list';
 
 @Component({
   selector: 'page-settings',
@@ -13,7 +14,7 @@ export class SettingsPopover {
   mailgunApiKey: string;
   items: Array<{naam: string, studnr: string}>;
 
-  constructor(http: Http, public viewCtrl: ViewController, public alertCtrl: AlertController) {
+  constructor(http: Http, public viewCtrl: ViewController, public alertCtrl: AlertController, public navCtrl: NavController) {
     this.http = http;
     this.mailgunUrl = "sandboxe1f52f7dc53545a983dcb21f63b99bc1.mailgun.org";
     this.mailgunApiKey = window.btoa("api:key-87642c6e289d814a735b9ed70a8dec15");
@@ -21,6 +22,7 @@ export class SettingsPopover {
   }
 
   close() {
+    this.navCtrl.push(ListPage);
     this.viewCtrl.dismiss();
   }
 
@@ -45,7 +47,7 @@ export class SettingsPopover {
         {
           text: 'Exporteer data',
           handler: data => {
-            this.emailVersturen(data.email, "test1", "dit is een test");
+            this.emailVersturen(data.email, "test1", this.ConvertToCSV());
           }
         }
       ]
@@ -79,6 +81,20 @@ export class SettingsPopover {
     });
   }
 
+  ConvertToCSV() {
+    var str = '';
+    var line;
+    for (var i = 0; i < this.items.length; i++) {
+      line = '';
+      for (var index in this.items[i]) {
+        if (line != '') line += ','
+        line += this.items[i][index];
+      }
+    str += line + '\r\n';
+    }
+    return str;
+  }
+
   bevestigingTonen() {
     let confirm = this.alertCtrl.create({
       title: 'Lijst wissen?',
@@ -87,13 +103,14 @@ export class SettingsPopover {
         {
           text: 'Ja, doorgaan',
           handler: () => {
-            console.log('agreed clicked');
+            localStorage.setItem('aanwezigen', '[]');
+            this.close();
           }
         },
         {
           text: 'Neen, teruggaan',
           handler: () => {
-            console.log('nope clicked');
+            this.close();
           }
         }
       ]
