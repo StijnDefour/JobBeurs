@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, AlertController } from 'ionic-angular';
+import { ViewController, AlertController } from 'ionic-angular';
 import { Headers, Http, Request, RequestMethod } from "@angular/http";
 import { ListPage } from '../list/list';
 
@@ -14,7 +14,7 @@ export class SettingsPopover {
   mailgunApiKey: string;
   items: Array<{naam: string, studnr: string}>;
 
-  constructor(http: Http, public viewCtrl: ViewController, public alertCtrl: AlertController, public navCtrl: NavController) {
+  constructor(http: Http, public viewCtrl: ViewController, public alertCtrl: AlertController) {
     this.http = http;
     this.mailgunUrl = "sandboxe1f52f7dc53545a983dcb21f63b99bc1.mailgun.org";
     this.mailgunApiKey = window.btoa("api:key-87642c6e289d814a735b9ed70a8dec15");
@@ -22,7 +22,6 @@ export class SettingsPopover {
   }
 
   close() {
-    this.navCtrl.push(ListPage);
     this.viewCtrl.dismiss();
   }
 

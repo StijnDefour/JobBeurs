@@ -21,6 +21,9 @@ export class ListPage {
 
 	weergevenPopover(event) {
 		let popover = this.popoverCtrl.create(SettingsPopover);
+		popover.onDidDismiss(() => {
+	      this.ionViewWillEnter();
+	    });
 		popover.present({
 			ev: event
 		});
