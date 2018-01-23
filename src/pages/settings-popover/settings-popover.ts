@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController, AlertController } from 'ionic-angular';
 import { Headers, Http, Request, RequestMethod } from "@angular/http";
-import { ListPage } from '../list/list';
 
 @Component({
   selector: 'page-settings',
@@ -74,7 +73,7 @@ export class SettingsPopover {
     this.http.request(new Request({
         method: RequestMethod.Post,
         url: "https://api:" + this.mailgunApiKey + "@api.mailgun.net/v3/" + this.mailgunUrl + "/messages",
-        body: "from=postmaster@sandboxe1f52f7dc53545a983dcb21f63b99bc1.mailgun.org&to=" + recipient + "&subject=" + subject + "&text=" + message,
+        body: "from=info@jobbeursapp.be&to=" + recipient + "&subject=" + subject + "&text=" + message,
         headers: requestHeaders
     }))
     .subscribe(success => {
