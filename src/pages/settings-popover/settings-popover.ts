@@ -26,39 +26,43 @@ export class SettingsPopover {
   }
 
   exporteren() {
-    let exporteren = this.alertCtrl.create({
-      title: 'Exporteren',
-      message: 'Naar welke email wilt u dat de data ge-exporteerd wordt?',
-      inputs: [
-        {
-          name: 'email',
-          placeholder: 'Email'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Annuleren',
-          role: 'cancel',
-          handler: data => {
-            console.log('Geanuleerd');
+    if (this.items.length != 0) {
+      let exporteren = this.alertCtrl.create({
+        title: 'Exporteren',
+        message: 'De data wordt verstuurd naar XXX',
+        buttons: [
+          {
+            text: 'Annuleren',
+            role: 'cancel',
+            handler: data => {
+              console.log('Geanuleerd');
+            }
+          },
+          {
+            text: 'Exporteer data',
+            handler: data => {
+              this.emailVersturen("s095683@ap.be", "Aanwezige studenten jobbeurs", this.ConvertToCSV());
+            }
           }
-        },
-        {
-          text: 'Exporteer data',
-          handler: data => {
-            this.emailVersturen(data.email, "test1", this.ConvertToCSV());
-          }
-        }
-      ]
-    });
+        ]
+      });
     exporteren.present();
+    }
+    else {
+      let alert = this.alertCtrl.create({
+        title: 'Geen data',
+        message: 'Er is geen data om te exporteren!',
+        buttons: ['Terug']
+      });
+    alert.present();
+    }
   }
 
   resultaatTonen(uitvoer) {
     let alert = this.alertCtrl.create({
       title: '',
       subTitle: uitvoer,
-      buttons: ['Dismiss']
+      buttons: ['Terug']
     });
     alert.present();
   }
@@ -74,9 +78,9 @@ export class SettingsPopover {
         headers: requestHeaders
     }))
     .subscribe(success => {
-        this.resultaatTonen("SUCCESS -> " + JSON.stringify(success));
+        this.resultaatTonen("Succesvol verstuurd!");
     }, error => {
-        this.resultaatTonen("ERROR -> " + JSON.stringify(error));
+        this.resultaatTonen("Er is een fout opgetreden. Probeer opnieuw!");
     });
   }
 
@@ -95,25 +99,35 @@ export class SettingsPopover {
   }
 
   bevestigingTonen() {
-    let confirm = this.alertCtrl.create({
-      title: 'Lijst wissen?',
-      message: 'Opgelet! U staat op het punt deze lijst te wissen. Bent u zeker?',
-      buttons: [
-        {
-          text: 'Ja, doorgaan',
-          handler: () => {
-            localStorage.setItem('aanwezigen', '[]');
-            this.close();
+    if (this.items.length != 0) {
+      let confirm = this.alertCtrl.create({
+        title: 'Lijst verwijderen?',
+        message: 'Opgelet! U staat op het punt deze lijst te verwijderen. Bent u zeker?',
+        buttons: [
+          {
+            text: 'Ja, doorgaan',
+            handler: () => {
+              localStorage.setItem('aanwezigen', '[]');
+              this.close();
+            }
+          },
+          {
+            text: 'Neen, teruggaan',
+            handler: () => {
+              this.close();
+            }
           }
-        },
-        {
-          text: 'Neen, teruggaan',
-          handler: () => {
-            this.close();
-          }
-        }
-      ]
-    });
+        ]
+      });
     confirm.present();
+    }
+    else {
+      let alert = this.alertCtrl.create({
+        title: 'Geen data',
+        message: 'Er is geen data om te verwijderen!',
+        buttons: ['Terug']
+      });
+    alert.present();
+    }
   }
 }
